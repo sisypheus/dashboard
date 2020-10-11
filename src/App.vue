@@ -1,12 +1,16 @@
 <template>
   <div id="app">
-    <input v-model="newLocation" @keyup.enter="addLocation()">
-    <button @click="addLocation()">Submit</button>
-    <div v-for="(location, index) in locations" :key="location.id">
-      <p v-if="typeof location.weather != 'undefined'">{{location.weather.name}}, {{location.weather.sys.country}}</p>
-      <p v-if="typeof location.weather != 'undefined'">{{Math.round(location.weather.main.temp) + '°C'}}</p>
-      <p v-if="location.weather.main.temp >= 20">&#127777;</p>
-      <button @click="locations.splice(index, 1)">Delete</button>
+    <div id="welcome">
+      <p ref="greeting"></p>
+    </div>
+    <div id="weather">
+      <input v-model="newLocation" @keyup.enter="addLocation()">
+      <button @click="addLocation()">Submit</button>
+      <div v-for="(location, index) in locations" :key="location.id">
+        <p v-if="typeof location.weather != 'undefined'">{{location.weather.name}}, {{location.weather.sys.country}}</p>
+        <p v-if="typeof location.weather != 'undefined'">{{Math.round(location.weather.main.temp) + '°C'}}</p>
+        <button @click="locations.splice(index, 1)">Delete</button>
+      </div>
     </div>
   </div>
 </template>
@@ -16,6 +20,7 @@ export default {
   name: 'App',
   data() {
     return {
+      name: 'Theo',
       id: 0,
       locations: [],
       newLocation: null,
@@ -25,6 +30,23 @@ export default {
     }
   },
   methods: {
+    greeting() {
+      let date_object = new Date();
+      let greeting;
+
+      switch (true) {
+        case (date_object.getHours() >= 14 && date_object.getHours() < 19):
+          greeting = 'Good afternoon ';
+          break;
+        case (date_object.getHours() >= 19 || date_object.getHours() >= 0 && date_object.getHours() < 9):
+          greeting = 'Good night ';
+          break;
+        case (date_object.getHours() >= 9 && date_object.getHours() < 14):
+          greeting = 'Good morning ';
+          break;
+      }
+      this.$refs.greeting.innerHTML = greeting + this.name;
+    },
     addLocation() {
       this.weather = fetch(`${this.baseurl}${this.newLocation}&units=metric&appid=${this.apikey}`)
         .then(res => {
@@ -49,6 +71,9 @@ export default {
       this.newLocation = null;
       this.weather = {};
     }
+  },
+  mounted() {
+    this.greeting();
   }
 }
 </script>
