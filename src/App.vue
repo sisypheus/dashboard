@@ -20,7 +20,7 @@ export default {
   name: 'App',
   data() {
     return {
-      name: 'Theo',
+      name: 'stoopid',
       id: 0,
       locations: [],
       newLocation: null,
@@ -32,19 +32,15 @@ export default {
   methods: {
     greeting() {
       let date_object = new Date();
+      let hour = date_object.getHours();
       let greeting;
 
-      switch (true) {
-        case (date_object.getHours() >= 14 && date_object.getHours() < 19):
-          greeting = 'Good afternoon ';
-          break;
-        case (date_object.getHours() >= 19 || date_object.getHours() >= 0 && date_object.getHours() < 9):
-          greeting = 'Good night ';
-          break;
-        case (date_object.getHours() >= 9 && date_object.getHours() < 14):
-          greeting = 'Good morning ';
-          break;
-      }
+      if (hour >= 14 && hour < 19)
+        greeting = 'Good afternoon ';
+      else if (hour >= 19 || hour >= 0 && hour < 9)
+        greeting = 'Good night ';
+      else
+        greeting = 'Good morning ';
       this.$refs.greeting.innerHTML = greeting + this.name;
     },
     addLocation() {
