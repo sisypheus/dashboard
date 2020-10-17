@@ -4,12 +4,9 @@
       <p ref="greeting"></p>
     </div>
     <div id="weather">
-      <input v-model="newLocation" @keyup.enter="addLocation()">
-      <button @click="addLocation()">Submit</button>
-      <div v-for="(location, index) in locations" :key="location.id">
-        <p v-if="typeof location.weather != 'undefined'">{{location.weather.name}}, {{location.weather.sys.country}}</p>
-        <p v-if="typeof location.weather != 'undefined'">{{Math.round(location.weather.main.temp) + '°C'}}</p>
-        <button @click="locations.splice(index, 1)">Delete</button>
+      <div id="weather_display">
+        <p v-if="weather.name && weather.sys && weather.sys.country">{{weather.name}}, {{weather.sys.country}}</p>
+        <p v-if="weather.main && weather.main.temp">{{weather.main.temp}}</p>
       </div>
     </div>
   </div>
@@ -20,11 +17,10 @@ export default {
   name: 'App',
   data() {
     return {
-      name: 'stoopid',
+      name: 'Theo',
       id: 0,
-      locations: [],
-      newLocation: null,
-      apikey: process.env.VUE_APP_API_KEY,
+      location: 'Lille',
+      weather_apikey: process.env.VUE_APP_API_KEY,
       baseurl: 'https://api.openweathermap.org/data/2.5/weather?q=',
       weather: {}
     }
@@ -43,8 +39,8 @@ export default {
         greeting = 'Good morning ';
       this.$refs.greeting.innerHTML = greeting + this.name;
     },
-    addLocation() {
-      this.weather = fetch(`${this.baseurl}${this.newLocation}&units=metric&appid=${this.apikey}`)
+    get_weather() {
+      this.weather = fetch(`${this.baseurl}${this.location}&units=metric&appid=${this.weather_apikey}`)
         .then(res => {
           if (res.status != 200)
             return 'error';
@@ -55,21 +51,15 @@ export default {
 
     setResults (results) {
       if (results == "error") {
-        this.resetVar();
+        this.weather = {};
         return;
       }
       this.weather = results;
-      this.locations.push({ title: this.newLocation, id: this.id++, weather: this.weather});
-      this.resetVar();
     },
-
-    resetVar () {
-      this.newLocation = null;
-      this.weather = {};
-    }
   },
   mounted() {
     this.greeting();
+    this.get_weather();
   }
 }
 </script>
