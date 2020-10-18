@@ -3,7 +3,7 @@
     <div id="welcome">
       <p ref="greeting"></p>
     </div>
-    <div id="weather">
+    <div ref="weather" id="weather">
       <div id="weather_display">
         <p v-if="weather.name && weather.sys && weather.sys.country">{{weather.name}}, {{weather.sys.country}}</p>
         <p v-if="weather.main && weather.main.temp">{{weather.main.temp}}</p>
@@ -22,7 +22,8 @@ export default {
       location: 'Lille',
       weather_apikey: process.env.VUE_APP_API_KEY,
       baseurl: 'https://api.openweathermap.org/data/2.5/weather?q=',
-      weather: {}
+      weather: {},
+      weather_image: 'blue'
     }
   },
   methods: {
@@ -40,7 +41,19 @@ export default {
       this.$refs.greeting.innerHTML = greeting + this.name;
     },
     set_weather_image() {
-      //switch (clear sky, few clouds, scattered clouds, broken clouds, shower rain, rain, thunderstorm, snow, mist)
+      let background = document.getElementById('weather');
+      console.log(background);
+      console.log(this.weather.weather[0].main);
+      switch (true) {
+        case (this.weather.weather[0].main == "Clear"):
+          this.$refs.weather.style.backgroundImage = "./assets/img/soleil.jpg";
+          break;
+        case (this.weather.weather[0].main == "Clouds"):
+          break;
+        default:
+          this.$refs.weather.style.backgroundImage = "./assets/img/pluie.jpg";
+          break;
+      }
     },
     get_weather() {
       this.weather = fetch(`${this.baseurl}${this.location}&units=metric&appid=${this.weather_apikey}`)
@@ -49,7 +62,8 @@ export default {
             return 'error';
           return res.json();
         })
-        .then(this.setResults);
+        .then(this.setResults)
+        .then(this.set_weather_image);
     },
     setResults (results) {
       if (results == "error") {
@@ -67,7 +81,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   @import './assets/style/main.css';
+
+  #weather {
+    background-image: url('./assets/img/pluie.jpg');
+  }
 </style>
 
