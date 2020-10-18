@@ -31,13 +31,16 @@ export default {
       let hour = date_object.getHours();
       let greeting;
 
-      if (hour >= 14 && hour < 19)
+      if (hour >= 14 && hour < 18)
         greeting = 'Good afternoon ';
-      else if (hour >= 19 || hour >= 0 && hour < 9)
+      else if (hour >= 18 || hour >= 0 && hour < 9)
         greeting = 'Good night ';
       else
         greeting = 'Good morning ';
       this.$refs.greeting.innerHTML = greeting + this.name;
+    },
+    set_weather_image() {
+      //switch (clear sky, few clouds, scattered clouds, broken clouds, shower rain, rain, thunderstorm, snow, mist)
     },
     get_weather() {
       this.weather = fetch(`${this.baseurl}${this.location}&units=metric&appid=${this.weather_apikey}`)
@@ -48,13 +51,13 @@ export default {
         })
         .then(this.setResults);
     },
-
     setResults (results) {
       if (results == "error") {
         this.weather = {};
         return;
       }
       this.weather = results;
+      console.log(results);
     },
   },
   mounted() {
