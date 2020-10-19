@@ -22,8 +22,7 @@ export default {
       location: 'Lille',
       weather_apikey: process.env.VUE_APP_API_KEY,
       baseurl: 'https://api.openweathermap.org/data/2.5/weather?q=',
-      weather: {},
-      weather_image: 'blue'
+      weather: {}
     }
   },
   methods: {
@@ -71,7 +70,6 @@ export default {
         return;
       }
       this.weather = results;
-      console.log(results);
     },
   },
   mounted() {
@@ -83,9 +81,5 @@ export default {
 
 <style scoped>
   @import './assets/style/main.css';
-
-  #weather {
-    background-image: url('./assets/img/pluie.jpg');
-  }
 </style>
 
