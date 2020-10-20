@@ -1,14 +1,20 @@
 <template>
   <div id="app">
     <div id="welcome">
-      <p ref="greeting"></p>
+      <p ref="greeting" id="greeting"></p>
     </div>
+
     <div id="weather">
       <img id="weather_image" v-if="weather_image != null" v-bind:src="require(`@/assets/img/${weather_image}`)"/>
       <div id="weather_container">
         <p v-if="weather.name && weather.sys && weather.sys.country">{{weather.name}}, {{weather.sys.country}}</p>
-        <p v-if="weather.main && weather.main.temp">{{weather.main.temp}} °C</p>
+        <p v-if="weather.main && weather.main.temp">{{Math.round(weather.main.temp)}} °C</p>
+        <p v-if="weather.weather && weather.weather[0].main">{{weather.weather[0].main}}</p>
       </div>
+    </div>
+
+    <div id="bank">
+      <p>Bank information</p>
     </div>
   </div>
 </template>
@@ -68,35 +74,49 @@ export default {
 <style scoped>
   @import './assets/style/main.css';
 
+  #greeting {
+    grid-area: a;
+    font-size: 1.7rem;
+    margin-top: 7rem;
+    font-weight: 600;
+  }
+
   #weather {
+    grid-area: b;
     color: black;
     position: relative;
     width: 90%;
   }
 
   #weather_container {
+    position: relative;
     margin-top: 5%;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.75);
     width: 30%;
     margin-left: 35%;
     border-radius: 10%;
   }
 
   p {
+    font-size: 1.3rem;
     text-align: center;
     font-weight: 400;
     text-shadow: 1px 1.2px rgba(0, 0, 0, 0.25);
   }
 
   #weather_image {
-    opacity: 0.8;
+    opacity: 0.85;
     pointer-events: none;
     position: absolute;
     width: 100%;
-    height: 20rem;
+    height: 25rem;
     border-radius: 3%;
-    z-index: -1;
+    z-index: 0;
     object-fit: cover;
+  }
+
+  #bank {
+    grid-area: c;
   }
 </style>
 

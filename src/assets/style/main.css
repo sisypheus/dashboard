@@ -2,6 +2,12 @@
     font-family: 'montserrat', sans-serif;
     display: grid;
     position: relative;
-    grid-template-columns: 1fr 1fr; 
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+    'a b'
+    'c b'
+    'd e';
+    grid-gap: 10px;
+    height: 98vh;
+    overflow: hidden;
 }
