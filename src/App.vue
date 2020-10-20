@@ -3,10 +3,11 @@
     <div id="welcome">
       <p ref="greeting"></p>
     </div>
-    <div ref="weather" id="weather">
-      <div id="weather_display">
+    <div id="weather">
+      <img id="weather_image" v-if="weather_image != null" v-bind:src="require(`@/assets/img/${weather_image}`)"/>
+      <div id="weather_container">
         <p v-if="weather.name && weather.sys && weather.sys.country">{{weather.name}}, {{weather.sys.country}}</p>
-        <p v-if="weather.main && weather.main.temp">{{weather.main.temp}}</p>
+        <p v-if="weather.main && weather.main.temp">{{weather.main.temp}} °C</p>
       </div>
     </div>
   </div>
@@ -22,7 +23,8 @@ export default {
       location: 'Lille',
       weather_apikey: process.env.VUE_APP_API_KEY,
       baseurl: 'https://api.openweathermap.org/data/2.5/weather?q=',
-      weather: {}
+      weather: {},
+      weather_image: 'lille.jpg'
     }
   },
   methods: {
@@ -39,21 +41,6 @@ export default {
         greeting = 'Good morning ';
       this.$refs.greeting.innerHTML = greeting + this.name;
     },
-    set_weather_image() {
-      let background = document.getElementById('weather');
-      console.log(background);
-      console.log(this.weather.weather[0].main);
-      switch (true) {
-        case (this.weather.weather[0].main == "Clear"):
-          this.$refs.weather.style.backgroundImage = "./assets/img/soleil.jpg";
-          break;
-        case (this.weather.weather[0].main == "Clouds"):
-          break;
-        default:
-          this.$refs.weather.style.backgroundImage = "./assets/img/pluie.jpg";
-          break;
-      }
-    },
     get_weather() {
       this.weather = fetch(`${this.baseurl}${this.location}&units=metric&appid=${this.weather_apikey}`)
         .then(res => {
@@ -61,8 +48,7 @@ export default {
             return 'error';
           return res.json();
         })
-        .then(this.setResults)
-        .then(this.set_weather_image);
+        .then(this.setResults);
     },
     setResults (results) {
       if (results == "error") {
@@ -81,5 +67,36 @@ export default {
 
 <style scoped>
   @import './assets/style/main.css';
+
+  #weather {
+    color: black;
+    position: relative;
+    width: 90%;
+  }
+
+  #weather_container {
+    margin-top: 5%;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 30%;
+    margin-left: 35%;
+    border-radius: 10%;
+  }
+
+  p {
+    text-align: center;
+    font-weight: 400;
+    text-shadow: 1px 1.2px rgba(0, 0, 0, 0.25);
+  }
+
+  #weather_image {
+    opacity: 0.8;
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 20rem;
+    border-radius: 3%;
+    z-index: -1;
+    object-fit: cover;
+  }
 </style>
 
