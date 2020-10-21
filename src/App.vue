@@ -91,13 +91,14 @@ export default {
   #weather_container {
     position: relative;
     margin-top: 5%;
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(24, 26, 27, 0.75);
     width: 30%;
     margin-left: 35%;
     border-radius: 10%;
   }
 
   p {
+    color: white;
     font-size: 1.3rem;
     text-align: center;
     font-weight: 400;
