@@ -12,8 +12,7 @@ let auth_token = (() => {
             'Bankin-Version': config.version,
             'Bankin-Device': config.device,
             'Client-id': config.user.id,
-            'Client-secret': config.user.secret,
-            'Authorization': 'Bearer'
+            'Client-secret': config.user.secret
         },
         body: {
             'client-secret': config.user.secret,
@@ -24,13 +23,16 @@ let auth_token = (() => {
         json: true
     })
     .then((response) => {
-        console.log(response);
-        return rp;
+        console.log((response.access_token));
+        return response.access_token;
     })
     .catch((err) => {
         console.log(err);
     });
-    console.log(rp);
+});
+
+let html = (() => {
+    console.log('zebi');
 });
 
 auth_token();
