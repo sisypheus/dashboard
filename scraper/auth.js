@@ -23,7 +23,7 @@ const get_token = new Promise((resolve, reject) => {
         json: true
     })
     .then((response) => {
-        resolve(response.acces_token);
+        resolve(response.access_token);
     })
     .catch((err) => {
         reject(err);

@@ -4,7 +4,7 @@ const get_token = require('./auth');
 
 get_token.then((token) => {
     rp({
-        uri: `https://sync.bankin.com/v2/accounts?limit=200&client_id=${config.user.id}&client_secret=${config.user.secret}`,
+        uri: `https://sync.bankin.com/v2/accounts?limit=200`,
         method: 'GET',
         headers: {
             'User-Agent': config.agent,
@@ -14,27 +14,20 @@ get_token.then((token) => {
             'Bankin-Device': config.device,
             'Client-id': config.user.id,
             'Client-secret': config.user.secret,
-            'Authorization': 'Bearer ' + token
-        },
-        body: {
-            'client-secret': config.user.secret,
-            'client-id': config.user.id,
-            'email': config.user.email,
-            'password': config.user.password
-        },
-        parameters: {
-            'limit': 200,
-            'client-id': config.user.id,
-            'client_secret': config.user.secret
+            'Authorization': 'Bearer ' + token,
+            'referer': 'https://app2.bankin.com/'
         },
         json: true
     })
     .then((response) => {
-        console.log((response.status));
-        //return response;
+        console.log(response.resources)
+        return response;
     })
     .catch((err) => {
         console.log(err);
     });
-    //console.log(token);
 });
+
+function get_accounts() {
+    
+}
