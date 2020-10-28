@@ -1,11 +1,10 @@
 const rp = require('request-promise');
 const config = require('./config').config;
-const get_token = require('./auth');
 
-get_token.then((token) => {
+const get_token = new Promise((resolve, reject) => {
     rp({
-        uri: `https://sync.bankin.com/v2/accounts?limit=200&client_id=${config.user.id}&client_secret=${config.user.secret}`,
-        method: 'GET',
+        uri: `https://sync.bankin.com/v2/authenticate`,
+        method: 'POST',
         headers: {
             'User-Agent': config.agent,
             'Accept': '*/*',
@@ -13,8 +12,7 @@ get_token.then((token) => {
             'Bankin-Version': config.version,
             'Bankin-Device': config.device,
             'Client-id': config.user.id,
-            'Client-secret': config.user.secret,
-            'Authorization': 'Bearer ' + token
+            'Client-secret': config.user.secret
         },
         body: {
             'client-secret': config.user.secret,
@@ -22,19 +20,14 @@ get_token.then((token) => {
             'email': config.user.email,
             'password': config.user.password
         },
-        parameters: {
-            'limit': 200,
-            'client-id': config.user.id,
-            'client_secret': config.user.secret
-        },
         json: true
     })
     .then((response) => {
-        console.log((response.status));
-        //return response;
+        resolve(response.acces_token);
     })
     .catch((err) => {
-        console.log(err);
+        reject(err);
     });
-    //console.log(token);
 });
+
+module.exports = get_token;
