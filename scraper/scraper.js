@@ -20,14 +20,14 @@ get_token.then((token) => {
         json: true
     })
     .then((response) => {
-        console.log(response.resources)
-        return response;
+        for (let i = 0; response.resources[i]; i++) {
+            if (response.resources[i].name == 'M. Poette Theo - Compte Cheque') {
+                //console.log(response.resources[i].balance);
+                return response.resources[i].balance;
+            }
+        }
     })
     .catch((err) => {
         console.log(err);
     });
 });
-
-function get_accounts() {
-    
-}
