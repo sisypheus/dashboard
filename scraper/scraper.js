@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 
-let balance = new Promise((resolve, reject) => {
+const balance = new Promise((resolve, reject) => {
     get_token.then((token) => {
         rp({
             uri: `https://sync.bankin.com/v2/accounts?limit=200`,
@@ -28,7 +28,6 @@ let balance = new Promise((resolve, reject) => {
         .then((response) => {
             for (let i = 0; response.resources[i]; i++) {
                 if (response.resources[i].name == 'M. Poette Theo - Compte Cheque') {
-                    console.log('here');
                     resolve(response.resources[i].balance);
                 }
             }
@@ -39,15 +38,8 @@ let balance = new Promise((resolve, reject) => {
     });
 });
 
-balance.then((balance) => {
-    console.log(balance);
-})
-
-app.get('/', (req, res) => {
-    balance
-    .then((balance) => {
-        return balance;
-    })
+app.get('/', async (req, res) => {
+    res.send({balance: await balance});
 });
 
 app.listen(PORT, () => {

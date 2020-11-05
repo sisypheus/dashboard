@@ -1,8 +1,8 @@
 const user = {
-    secret: 'HzUGKTc7JVY7yys7IGi67jJBkzfoT4bNUIIk2odAmDDlHjaHoPSL05FnXSuAqp1q',
-    id: 'f8d39787dbdd491bb11924891241c97c',
-    password: 'Nadal2010',
-    email: 'poette.theo@gmail.com'
+    secret: process.env.USER_SECRET,
+    id: process.env.USER_ID,
+    password: process.env.USER_PASSWORD,
+    email: process.env.USER_EMAIL
 }
 
 const config = {
