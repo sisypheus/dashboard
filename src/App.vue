@@ -14,7 +14,7 @@
     </div>
 
     <div id="bank">
-      <h2>Bank information</h2>
+      <h2>Bank status</h2>
       <p v-if="balance != null">{{balance}}€, careful with that budget!</p>
     </div>
   </div>
@@ -83,6 +83,7 @@ export default {
 
 <style scoped>
   @import './assets/style/main.css';
+  @import './assets/style/mobile.css';
 
   #greeting {
     grid-area: a;
@@ -95,7 +96,6 @@ export default {
     grid-area: b;
     color: black;
     position: relative;
-    width: 90%;
   }
 
   #weather_container {
