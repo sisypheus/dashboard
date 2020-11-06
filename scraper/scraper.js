@@ -2,6 +2,7 @@ const express = require('express');
 const rp = require('request-promise');
 const config = require('./config').config;
 const get_token = require('./auth');
+const cors = require('cors');
 
 const PORT = process.env.PORT || 5000;
 
@@ -38,8 +39,10 @@ const balance = new Promise((resolve, reject) => {
     });
 });
 
+app.use(cors());
+
 app.get('/', async (req, res) => {
-    res.send({balance: await balance});
+    res.json({"balance": await balance});
 });
 
 app.listen(PORT, () => {

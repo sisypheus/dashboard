@@ -14,7 +14,8 @@
     </div>
 
     <div id="bank">
-      <p>Bank information</p>
+      <h2>Bank information</h2>
+      <p v-if="balance != null">{{balance}}€, careful with that budget!</p>
     </div>
   </div>
 </template>
@@ -30,7 +31,8 @@ export default {
       weather_apikey: process.env.VUE_APP_API_KEY,
       baseurl: 'https://api.openweathermap.org/data/2.5/weather?q=',
       weather: {},
-      weather_image: 'lille.jpg'
+      weather_image: 'lille.jpg',
+      balance: null
     }
   },
   methods: {
@@ -63,10 +65,18 @@ export default {
       }
       this.weather = results;
     },
+    get_balance() {
+      this.$http.
+      get('https://bankin-scraper.herokuapp.com/')
+      .then((response) => {
+        this.balance = response.data.balance;
+      }) 
+    }
   },
   mounted() {
     this.greeting();
     this.get_weather();
+    this.get_balance();
   }
 }
 </script>
@@ -91,7 +101,7 @@ export default {
   #weather_container {
     position: relative;
     margin-top: 5%;
-    background-color: rgba(24, 26, 27, 0.75);
+    background-color: rgba(0, 0, 0, 0.8);
     width: 30%;
     margin-left: 35%;
     border-radius: 10%;
@@ -103,6 +113,13 @@ export default {
     text-align: center;
     font-weight: 400;
     text-shadow: 1px 1.2px rgba(0, 0, 0, 0.25);
+  }
+
+  h2 {
+    text-align: center;
+    font-weight: 500;
+    color: white;
+    font-size: 1.9rem;
   }
 
   #weather_image {
