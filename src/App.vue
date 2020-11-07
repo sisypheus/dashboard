@@ -24,6 +24,15 @@
       </div>
     </div>
 
+    <div v-if="quote" id="quote">
+      <p v-if="quote.text" id="quote_text">
+        {{ quote.text }}
+      </p>
+      <h2 v-if="quote.author" id="quote_author">
+        {{ quote.author }}
+      </h2>
+    </div>
+
     <div id="bank">
       <h2>Bank status</h2>
       <p v-if="balance != null">{{ balance }}€, careful with that budget!</p>
@@ -44,6 +53,7 @@ export default {
       weather: {},
       weather_image: "lille.jpg",
       balance: null,
+      quote: {}
     };
   },
   methods: {
@@ -81,11 +91,19 @@ export default {
           this.balance = response.data.balance;
         });
     },
+    get_quote_of_the_day() {
+      this.$http
+        .get("https://cors-anywhere.herokuapp.com/https://zenquotes.io/api/today")
+        .then((response) => {
+          this.quote = {text: response.data[0].q, author: response.data[0].a};
+        });
+    }
   },
   mounted() {
     this.greeting();
     this.get_weather();
     this.get_balance();
+    this.get_quote_of_the_day();
   },
 };
 </script>
@@ -143,7 +161,7 @@ h2 {
 }
 
 #bank {
-  grid-area: c;
+  grid-area: d;
 }
 
 #text_styling {
@@ -154,6 +172,15 @@ h2 {
   margin-bottom: -12vh;
   height: 35vh;
   width: 35vh;
+}
+
+#quote_text {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+#quote_author {
+  font-size: 1.6rem;
 }
 </style>
 
