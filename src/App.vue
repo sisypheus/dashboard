@@ -168,8 +168,8 @@ h2 {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: -10vh;
-  margin-bottom: -12vh;
+  margin-top: -12vh;
+  margin-bottom: -10vh;
   height: 35vh;
   width: 35vh;
 }
