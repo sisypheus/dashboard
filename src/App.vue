@@ -155,7 +155,7 @@ h2 {
   position: absolute;
   width: 100%;
   height: 25rem;
-  border-radius: 3%;
+  border-radius: 5%;
   z-index: 0;
   object-fit: cover;
 }

@@ -1,12 +1,18 @@
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1050px) {
     #app {
         grid-template-columns: 1fr;
         grid-template-areas:
         'a'
         'b'
+        'b'
         'c'
         'd'
         'e';
+    }
+
+    #welcome {
+        margin-top: -5vh;
+        margin-bottom: 3vh;
     }
 
     #weather {
@@ -15,13 +21,13 @@
 
     #weather_image {
         max-height: 100%;
-        max-width: 100%;
+        max-width: 95%;
         display:block;
-        margin: auto 0;
+        margin: auto 2.5%;
     }
 }
 
-@media screen and (min-width: 901px) {
+@media screen and (min-width: 1051px) {
     #weather {
         width: 90%;
     }
