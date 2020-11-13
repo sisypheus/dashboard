@@ -8,6 +8,11 @@
         'c'
         'd'
         'e';
+        overflow: auto;
+    }
+
+    #clock {
+        margin-top: 15vh;
     }
 
     #welcome {

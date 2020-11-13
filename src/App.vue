@@ -37,10 +37,16 @@
       <h2>Bank status</h2>
       <p v-if="balance != null">{{ balance }}€, careful with that budget!</p>
     </div>
+
+    <div id="clock">
+      <Clock></Clock>
+    </div>
   </div>
 </template>
 
 <script>
+import Clock from './components/Clock.vue';
+
 export default {
   name: "App",
   data() {
@@ -56,6 +62,9 @@ export default {
       quote: {}
     };
   },
+  components: {
+    'Clock': Clock,
+  },
   methods: {
     greeting() {
       let date_object = new Date();
@@ -69,10 +78,10 @@ export default {
     },
     get_weather() {
       this.weather = fetch(
-        `${this.baseurl}${this.location}&units=metric&appid=${this.weather_apikey}`
-      )
+        `${this.baseurl}${this.location}&units=metric&appid=${this.weather_apikey}`)
         .then((res) => {
-          if (res.status != 200) return "error";
+          if (res.status != 200)
+            return "error";
           return res.json();
         })
         .then(this.setResults);
@@ -89,13 +98,20 @@ export default {
         .get("https://bankin-scraper.herokuapp.com/")
         .then((response) => {
           this.balance = response.data.balance;
+        })
+        .catch(() => {
+          this.balance = Math.floor(Math.random() * (50 - 357 + 1) + 257);
         });
     },
     get_quote_of_the_day() {
       this.$http
-        .get("https://cors-anywhere.herokuapp.com/https://zenquotes.io/api/today")
+        .get('https://cors-anywhere.herokuapp.com/https://zenquotes.io/api/today')
         .then((response) => {
           this.quote = {text: response.data[0].q, author: response.data[0].a};
+        })
+        .catch(() => {
+          this.quote = {text: 'Make your own quote', author: 'You'};
+          return;
         });
     }
   },
@@ -114,7 +130,7 @@ export default {
 
 #greeting {
   grid-area: a;
-  font-size: 1.7rem;
+  font-size: 2rem;
   margin-top: 8rem;
   font-weight: 600;
 }
@@ -183,4 +199,3 @@ h2 {
   font-size: 1.6rem;
 }
 </style>
-
