@@ -40,6 +40,7 @@
 
     <div id="clock">
       <Clock></Clock>
+      <img id="clock_img" src="@/assets/img/clock.png"/>
     </div>
   </div>
 </template>
@@ -171,7 +172,7 @@ h2 {
   position: absolute;
   width: 100%;
   height: 25rem;
-  border-radius: 5%;
+  border-radius: 3%;
   z-index: 0;
   object-fit: cover;
 }
@@ -197,5 +198,13 @@ h2 {
 
 #quote_author {
   font-size: 1.6rem;
+}
+
+#clock_img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 17%;
+  height: auto;
 }
 </style>
