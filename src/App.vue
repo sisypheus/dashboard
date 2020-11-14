@@ -34,8 +34,12 @@
     </div>
 
     <div id="bank">
-      <h2>Bank status</h2>
-      <p v-if="balance != null">{{ balance }}€, careful with that budget!</p>
+      <h2>Bank</h2>
+      <div id="bank_wrapper">
+        <img class="bill left" src="@/assets/img/money.png"/>
+        <p id ="balance" v-if="balance != null">{{ balance }}€</p>
+        <img class="bill right" src="@/assets/img/money.png"/>
+      </div>
     </div>
 
     <div id="clock">
@@ -206,5 +210,25 @@ h2 {
   margin-right: auto;
   width: 17%;
   height: auto;
+}
+
+#bank_wrapper {
+  display: inline-block;
+  text-align: center;
+}
+
+.left, .right {
+  display: inline-block;
+}
+
+.bill {
+  vertical-align: middle;
+  width: 12%;
+}
+
+#balance {
+  display: inline-block;
+  margin: 1rem;
+  margin-top: -5rem;
 }
 </style>
