@@ -223,12 +223,14 @@ h2 {
 
 .bill {
   vertical-align: middle;
-  width: 12%;
+  width: 8%;
 }
 
 #balance {
   display: inline-block;
   margin: 1rem;
   margin-top: -5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 </style>
