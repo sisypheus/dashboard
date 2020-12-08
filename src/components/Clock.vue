@@ -48,11 +48,9 @@
         margin-bottom: 0;
     }
 
-    #clock {
-        margin-top: -15vh;
-    }
-
     .text-white {
+        margin: 1.2rem;
+        
         text-align: center;
         color: white;
     }

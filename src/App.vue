@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <div id="clock">
+    <div id="clock_wrapper">
       <Clock></Clock>
       <img id="clock_img" src="@/assets/img/clock.png"/>
     </div>
@@ -133,10 +133,20 @@ export default {
 @import "./assets/style/main.css";
 @import "./assets/style/mobile.css";
 
+#welcome {
+  margin-top: 1.2rem;
+  margin-left: 25%;
+  margin-top: 6rem;
+  margin-bottom: 4rem;
+  background-color: #01032e;
+  border-radius: 5%;
+  box-shadow: 10px 5px 5px #010324;
+  width: 50%;
+}
+
 #greeting {
   grid-area: a;
   font-size: 2rem;
-  margin-top: 8rem;
   font-weight: 600;
 }
 
@@ -144,6 +154,7 @@ export default {
   grid-area: b;
   color: black;
   position: relative;
+  margin-top: 1.2rem;
 }
 
 #weather_container {
@@ -183,6 +194,12 @@ h2 {
 
 #bank {
   grid-area: d;
+  background-color: #01032e;
+  border-radius: 10%;
+  box-shadow: 10px 5px 5px #010324;
+  margin-left: 32.5%;
+  width: 35%;
+  height: 65%;
 }
 
 #text_styling {
@@ -195,21 +212,48 @@ h2 {
   width: 35vh;
 }
 
+#quote {
+  background-color: #01032e;
+  border-radius: 10%;
+  box-shadow: 10px 5px 5px #010324;
+  width: 82%;
+  margin-top: 2rem;
+  margin-left: 9%;
+}
+
 #quote_text {
   font-size: 2rem;
   font-weight: 600;
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
 }
 
 #quote_author {
   font-size: 1.6rem;
+  margin-bottom: -.5rem;
+}
+
+#clock_wrapper {
+  background-color: #01032e;
+  border-radius: 10%;
+  box-shadow: 10px 5px 5px #010324;
+  margin-left: 19%;
+  margin-top: -15vh;
+  margin-bottom: 1.5rem;
+  width: 62%;
 }
 
 #clock_img {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 17%;
+  margin-top: 1.2rem;
+  width: 20%;
   height: auto;
+}
+
+#bank {
+  margin-top: 4rem;
 }
 
 #bank_wrapper {
@@ -223,7 +267,7 @@ h2 {
 
 .bill {
   vertical-align: middle;
-  width: 8%;
+  width: 15%;
 }
 
 #balance {
