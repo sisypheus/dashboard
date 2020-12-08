@@ -12,7 +12,16 @@
     }
 
     #clock {
-        margin-top: 15vh;
+        margin: 2rem;
+    }
+
+    #clock_img {
+        margin-bottom: 2.5rem;
+    }
+
+    #bank {
+        margin-bottom: 30%;
+        height: 37% !important;
     }
 
     #welcome {
@@ -29,6 +38,14 @@
         max-width: 95%;
         display:block;
         margin: auto 2.5%;
+    }
+
+    #quote {
+        margin-top: 4.5rem !important;
+    }
+
+    #quote_author {
+        margin-bottom: 1.5rem !important;
     }
 }
 

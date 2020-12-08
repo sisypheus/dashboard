@@ -50,7 +50,7 @@
 
     .text-white {
         margin: 1.2rem;
-        
+
         text-align: center;
         color: white;
     }
