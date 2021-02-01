@@ -59,7 +59,7 @@ export default {
       name: "Theo",
       id: 0,
       location: "Lille",
-      weather_apikey: process.env.VUE_APP_API_KEY,
+      weather_apikey: "9c08c70c211d111c1764de9691e3c902",
       baseurl: "https://api.openweathermap.org/data/2.5/weather?q=",
       weather: {},
       weather_image: "lille.jpg",
